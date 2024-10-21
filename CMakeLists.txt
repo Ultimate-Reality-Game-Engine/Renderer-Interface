@@ -23,10 +23,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "List 
 #**************************************************************************************************
 
 # Create CMake reference to this source directory, can be used in CMake files that include this target
-set(RendererInterface_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(RendererInterface_SOURCE_DIR $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
 # Create the Renderer Interface library
 add_library(RendererInterface INTERFACE)
+
+target_include_directories(RendererInterface INTERFACE ${RendererInterface_SOURCE_DIR}/include)
 
 # End Target Creation *****************************************************************************
 #**************************************************************************************************
