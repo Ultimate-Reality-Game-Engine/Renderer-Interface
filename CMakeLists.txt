@@ -27,10 +27,6 @@ set(RendererInterface_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Create the Renderer Interface library
 add_library(RendererInterface INTERFACE)
-target_include_directories(RendererInterface INTERFACE 
-	$<BUILD_INTERFACE:${RendererInterface_SOURCE_DIR}/include> 
-	$<INSTALL_INTERFACE:include> 
-)
 
 # End Target Creation *****************************************************************************
 #**************************************************************************************************
