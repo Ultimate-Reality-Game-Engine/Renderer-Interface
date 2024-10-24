@@ -16,6 +16,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Define custom configuration types for Debug, Release, and Release-Dev
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "List of supported build modes." FORCE)
 
+# Define compiler definitions to create OS specific code segments
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	add_compile_definitions(TARGET_OS=Windows _WIN_TARGET)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	add_compile_definitions(TARGET_OS=Linux _LINUX_TARGET)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin") #MacOS
+	add_compile_definitions(TARGET_OS=MacOS _MACOS_TARGET)
+endif()
+
+# Make sure CMake exports its compile commands so things like IntelliSense can detect them in editor
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # End CMake configuration and settings ************************************************************
 #**************************************************************************************************
 
@@ -34,8 +46,8 @@ target_include_directories(RendererInterface INTERFACE
 )
 
 set_target_properties(RendererInterface PROPERTIES 
-	INTERFACE_RENDERER_INTERFACE_VERSION ${RENDERER_INTERFACE_VERSION} 
- 	INTERFACE_RENDERER_INTERFACE_VERSION_MAJOR ${RENDERER_INTERFACE_VERSION_MAJOR}
+	PROPERTIE_RENDERER_INTERFACE_VERSION ${RENDERER_INTERFACE_VERSION} 
+ 	PROPERTIE_RENDERER_INTERFACE_VERSION_MAJOR ${RENDERER_INTERFACE_VERSION_MAJOR}
 )
 
 # End Target Creation *****************************************************************************
